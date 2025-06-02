@@ -1,0 +1,87 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Link from "next/link";
+import styles from "../page.module.css";
+
+const Personnes = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/person");
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Pagination logic
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentData = data.slice(startIndex, startIndex + itemsPerPage);
+
+  const goToPrevious = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
+  const goToNext = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  };
+
+  return (
+    <div>
+      {loading ? (
+        <p>Chargement...</p>
+      ) : (
+        <>
+          <div>
+            <main className={styles.container}>
+              <h1>Personnes</h1>
+
+              <div className={styles.liste}>
+                {currentData.map((person) => (
+                  <div key={person.id}>
+                    <Link
+                      className={styles.lien}
+                      href={`/personnes/${person.id}`}
+                    >
+                      {person.firstName} {person.lastName}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+
+              {/* Pagination controls */}
+              <div className={styles.pagination}>
+                <button onClick={goToPrevious} disabled={currentPage === 1}>
+                  Précédent
+                </button>
+                <span>
+                  {" "}
+                  Page {currentPage} / {totalPages}{" "}
+                </span>
+                <button
+                  onClick={goToNext}
+                  disabled={currentPage === totalPages}
+                >
+                  Suivant
+                </button>
+              </div>
+            </main>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Personnes;
