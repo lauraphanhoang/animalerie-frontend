@@ -15,7 +15,9 @@ const Animaux = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/animal");
+        const API = process.env.NEXT_PUBLIC_API_URL;
+
+        const response = await axios.get(`${API}/animal`);
         setData(response.data);
         // console.log(response.data.animals);
         setLoading(false);
