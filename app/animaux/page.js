@@ -15,7 +15,9 @@ const Animaux = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/animal");
+        const response = await axios.get(
+          "https://animalerie-backend.onrender.com/animal"
+        );
         setData(response.data);
         // console.log(response.data.animals);
         setLoading(false);
