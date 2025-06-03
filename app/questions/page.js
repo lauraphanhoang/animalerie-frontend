@@ -70,7 +70,7 @@ export default function QuestionsPage() {
   function getFormattedAnswer(key) {
     const answer = data[key];
     if (!answer) return "Aucune donnée disponible.";
-    console.log("🔍 Données pour", key, answer);
+    console.log("Données pour", key, answer);
 
     switch (key) {
       case "oldest":

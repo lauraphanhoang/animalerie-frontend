@@ -19,7 +19,7 @@ const Animaux = () => {
           `${process.env.NEXT_PUBLIC_API_URL}/animal`
         );
         setData(response.data);
-        console.log("Réponse API :", response.data);
+        // console.log("Réponse API :", response.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
