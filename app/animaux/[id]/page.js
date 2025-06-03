@@ -16,7 +16,7 @@ const AnimalInformations = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://animalerie-backend.onrender.com/animal/${id}`
+          `${process.env.NEXT_PUBLIC_API_URL}/animal/${id}`
         );
         setAnimal(response.data);
         setOwner(response.data.owner);

@@ -13,7 +13,9 @@ const Informations = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const personRes = await axios.get(`http://localhost:3000/person/${id}`);
+        const personRes = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/person/${id}`
+        );
         setPerson(personRes.data);
 
         // si les animaux sont déjà inclus (relations), pas besoin de second appel

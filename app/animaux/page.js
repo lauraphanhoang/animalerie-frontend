@@ -16,10 +16,10 @@ const Animaux = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://animalerie-backend.onrender.com/animal"
+          `${process.env.NEXT_PUBLIC_API_URL}/animal`
         );
         setData(response.data);
-        // console.log(response.data.animals);
+        console.log("Réponse API :", response.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
