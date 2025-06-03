@@ -5,14 +5,6 @@
 ## Installation guide
 
 ```bash
-git clone https://github.com/lauraphanhoang/animalerie-frontend.git
-```
-
-```bash
-cd animalerie-frontend
-```
-
-```bash
 $ npm install
 ```
 
@@ -20,11 +12,10 @@ $ npm install
 $ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 ## Overview
 
 Animalerie backend : https://github.com/lauraphanhoang/animalerie-backend.git
+Deploiement : https://laura-phanhoang-animalerie.netlify.app/
 
 ## Packages
 
@@ -39,3 +30,4 @@ Animalerie backend : https://github.com/lauraphanhoang/animalerie-backend.git
 - Page d'accueil
 - Page Personnes
 - Page Animaux
+- Page Questions
