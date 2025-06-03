@@ -16,6 +16,9 @@ const Navbar = () => {
           <Link href="/animaux" className={styles.link}>
             Animaux
           </Link>
+          <Link href="/questions" className={styles.link}>
+            Questions
+          </Link>
         </div>
       </div>
     </nav>
