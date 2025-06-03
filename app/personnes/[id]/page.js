@@ -17,8 +17,6 @@ const Informations = () => {
           `${process.env.NEXT_PUBLIC_API_URL}/person/${id}`
         );
         setPerson(personRes.data);
-
-        // si les animaux sont déjà inclus (relations), pas besoin de second appel
         setAnimals(personRes.data.animals || []);
       } catch (err) {
         console.error(err);
@@ -34,31 +32,34 @@ const Informations = () => {
 
   return (
     <div className={styles.container}>
-      <h1>
-        {person.firstName} {person.lastName}
-      </h1>
-      <p>
-        <strong>Email :</strong> {person.email}
-      </p>
-      <p>
-        <strong>Téléphone :</strong> {person.phoneNumber}
-      </p>
-
-      <h2>Animaux :</h2>
-      {animals.length === 0 ? (
-        <p>Aucun animal enregistré pour cette personne.</p>
-      ) : (
+      <div className={styles.liste}>
+        <h1>
+          {person.firstName} {person.lastName}
+        </h1>
         <p>
-          {animals.map((animal) => (
-            <div key={animal.id}>
-              {animal.name} - {animal.species}, {animal.breed}
-            </div>
-          ))}
+          <strong>email :</strong> {person.email}
         </p>
-      )}
-      <Link href="/personnes">
-        <button className={styles.button}>← Retour à la liste</button>
-      </Link>
+        <p>
+          <strong>téléphone :</strong> {person.phoneNumber}
+        </p>
+
+        <h2>Animaux </h2>
+        {animals.length === 0 ? (
+          <p>Aucun animal enregistré pour cette personne.</p>
+        ) : (
+          <div>
+            {animals.map((animal) => (
+              <div key={animal.id}>
+                {animal.name} - {animal.species}, {animal.breed}
+              </div>
+            ))}
+          </div>
+        )}
+        <br></br>
+        <Link href="/personnes">
+          <button className={styles.button}>← Retour à la liste</button>
+        </Link>
+      </div>
     </div>
   );
 };

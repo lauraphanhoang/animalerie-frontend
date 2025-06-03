@@ -37,42 +37,41 @@ const AnimalInformations = () => {
 
   return (
     <div className={styles.container}>
-      <h1>{animal.name}</h1>
-      <p>
-        <strong>Espèce :</strong> {animal.species}
-      </p>
-      <p>
-        <strong>Race :</strong> {animal.breed}
-      </p>
-      {animal.color && (
+      <div className={styles.liste}>
+        <h1>{animal.name}</h1>
         <p>
-          <strong>Couleur :</strong> {animal.color}
+          <strong>espèce :</strong> {animal.species}
         </p>
-      )}
-      {animal.weight && (
         <p>
-          <strong>Poids :</strong> {animal.weight}g
+          <strong>race :</strong> {animal.breed}
         </p>
-      )}
-      <h2>Maître</h2>
-      {owner ? (
-        <div>
-          <p>
-            <strong>Nom :</strong> {owner.firstName} {owner.lastName}
-          </p>
-          <p>
-            <strong>Email :</strong> {owner.email}
-          </p>
-          <p>
-            <strong>Téléphone :</strong> {owner.phoneNumber}
-          </p>
-        </div>
-      ) : (
-        <p>Aucun maître enregistré.</p>
-      )}
-      <Link href="/animaux">
-        <button className={styles.button}>← Retour à la liste</button>
-      </Link>
+        <p>
+          <strong>couleur :</strong> {animal.color}
+        </p>
+        <p>
+          <strong>poids :</strong> {animal.weight} g
+        </p>
+
+        <h2>Maître</h2>
+        {owner ? (
+          <div>
+            <p>
+              <strong>nom :</strong> {owner.firstName} {owner.lastName}
+            </p>
+            <p>
+              <strong>email :</strong> {owner.email}
+            </p>
+            <p>
+              <strong>téléphone :</strong> {owner.phoneNumber}
+            </p>
+          </div>
+        ) : (
+          <p>Aucun maître enregistré.</p>
+        )}
+        <Link href="/animaux">
+          <button className={styles.button}>← Retour à la liste</button>
+        </Link>
+      </div>
     </div>
   );
 };

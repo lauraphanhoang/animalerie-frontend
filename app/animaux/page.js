@@ -8,7 +8,6 @@ import styles from "../page.module.css";
 const Animaux = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const [name, setName] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -29,17 +28,35 @@ const Animaux = () => {
     fetchData();
   }, []);
 
-  // Pagination logic
+  // Pagination
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentData = data.slice(startIndex, startIndex + itemsPerPage);
 
-  const goToPrevious = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const changePage = (page) => {
+    if (page !== "..." && page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
-  const goToNext = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const getPageNumbers = () => {
+    const pages = [];
+
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      pages.push(1);
+      if (currentPage > 4) pages.push("...");
+
+      const start = Math.max(2, currentPage - 1);
+      const end = Math.min(totalPages - 1, currentPage + 1);
+      for (let i = start; i <= end; i++) pages.push(i);
+
+      if (currentPage < totalPages - 3) pages.push("...");
+      pages.push(totalPages);
+    }
+
+    return pages;
   };
 
   return (
@@ -50,10 +67,11 @@ const Animaux = () => {
         <>
           <div>
             <main>
-              <h1>Animaux</h1>
+              <h1>Listes des animaux</h1>
+
               <div className={styles.liste}>
                 {currentData.map((animal) => (
-                  <div key={animal.id}>
+                  <div className={styles.item} key={animal.id}>
                     <Link
                       className={styles.lien}
                       href={`/animaux/${animal.id}`}
@@ -64,17 +82,27 @@ const Animaux = () => {
                 ))}
               </div>
 
-              {/* Pagination controls */}
               <div className={styles.pagination}>
-                <button onClick={goToPrevious} disabled={currentPage === 1}>
+                <button
+                  onClick={() => changePage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
                   Précédent
                 </button>
-                <span>
-                  {" "}
-                  Page {currentPage} / {totalPages}{" "}
-                </span>
+
+                {getPageNumbers().map((page, index) => (
+                  <button
+                    key={index}
+                    onClick={() => changePage(page)}
+                    disabled={page === "..."}
+                    className={page === currentPage ? styles.activePage : ""}
+                  >
+                    {page}
+                  </button>
+                ))}
+
                 <button
-                  onClick={goToNext}
+                  onClick={() => changePage(currentPage + 1)}
                   disabled={currentPage === totalPages}
                 >
                   Suivant

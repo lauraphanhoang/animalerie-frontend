@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import styles from "../page.module.css";
 
 export default function QuestionsPage() {
   const [data, setData] = useState({});
@@ -14,16 +15,18 @@ export default function QuestionsPage() {
     },
     {
       key: "topOwner",
-      label: "Quel est le propriétaire ayant le plus d'animaux ?",
+      label: "Qui possède le plus d'animaux ?",
     },
     {
       key: "topCatOwner",
-      label: "Quel est le propriétaire ayant le plus de chats ?",
+      label: "Qui possède le plus de chats ?",
     },
     { key: "heaviestAnimal", label: "Quel est l'animal le plus lourd ?" },
+
     {
       key: "heaviestGroup",
-      label: "Quel propriétaire a le groupe d’animaux le plus lourd ?",
+      label:
+        "Qui possède le groupe d’animaux le plus lourd ? Quel est le poids total de ce groupe d’animaux ?",
     },
   ];
 
@@ -74,11 +77,9 @@ export default function QuestionsPage() {
 
     switch (key) {
       case "oldest":
-        return `L'animal le plus vieux est ${answer.name}, un ${answer.color} ${
+        return `${answer.name} est l'animal le plus vieux, un ${answer.color} ${
           answer.breed
-        } ${answer.species} né le ${formatDate(answer.dateOfBirth)}. Il pèse ${
-          answer.weight
-        } grammes.`;
+        } ${answer.species} né le ${formatDate(answer.dateOfBirth)}.`;
 
       case "mostRepresentedSpecies":
         return `L'espèce la plus représentée est ${answer.animal_species} avec ${answer.count} animaux.`;
@@ -103,7 +104,7 @@ export default function QuestionsPage() {
   if (loading) return <p>Chargement des questions...</p>;
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
+    <div className={styles.container}>
       <h1>Questions fréquentes</h1>
       <div style={{ marginTop: "1rem" }}>
         {questions.map((q) => (
@@ -113,7 +114,8 @@ export default function QuestionsPage() {
               style={{
                 background: "#f0f0f0",
                 border: "1px solid #ccc",
-                padding: "1rem",
+                borderRadius: "5px",
+                padding: "15px",
                 width: "100%",
                 textAlign: "left",
                 cursor: "pointer",
@@ -127,6 +129,7 @@ export default function QuestionsPage() {
                 style={{
                   fontSize: "13px",
                   padding: "10px",
+                  borderRadius: "5px",
                   background: "#fafafa",
                   border: "1px solid #eee",
                   borderTop: "none",
