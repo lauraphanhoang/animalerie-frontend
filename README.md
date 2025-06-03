@@ -1,6 +1,4 @@
-<!-- TITLE -->
-
-<h1 align="center">Animalerie - FrontEnd</h1>
+<h1 align="center"> 🐾 Animalerie - FrontEnd</h1>
 
 ## Installation guide
 
@@ -15,7 +13,8 @@ $ npm run dev
 ## Overview
 
 Animalerie backend : https://github.com/lauraphanhoang/animalerie-backend.git
-Deploiement : https://laura-phanhoang-animalerie.netlify.app/
+
+Deploiement sur Netlify : https://laura-phanhoang-animalerie.netlify.app/
 
 ## Packages
 
